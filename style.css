@@ -15,6 +15,7 @@ body{
     justify-content: flex-end;
     align-items: center;
     font-size: 100px;
+    overflow: scroll hidden;
 }
 .container {
     width: 600px;
@@ -45,7 +46,7 @@ body{
     width: 500px;
 }
 #zero{
-    flex: 4 1 0;
+    flex: 1;
 }
 button{
     padding: 0;
