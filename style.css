@@ -4,12 +4,17 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
+    background: rgb(235,236,12);background: linear-gradient(45deg, rgba(235,236,12,1) 0%, rgba(225,229,23,1) 20%, rgba(0,74,255,1) 50%, rgba(33,255,25,1) 86%);
+} 
 .result {
     width: 500px;
     height: 200px;
+    margin-top: 15px;
     background-color: pink;
     display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 100px;
 }
 .container {
     width: 600px;
@@ -18,7 +23,8 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 30px;
+    gap: 15px;
+    opacity: 1;
 }
 .buttons{
     width: 500px;
@@ -46,6 +52,10 @@ button{
     margin: 0;
     width: 125px;
     height: 114px;
+    font-size: 20px;
     border: 1px solid black;
     box-sizing: border-box;
+}
+button:hover{
+    border: 1px solid red;
 }
