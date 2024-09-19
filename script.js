@@ -65,8 +65,7 @@ function displayOperator(opBtn) {
                     isOperatorLast = false;
                     idxOfOperatorInEquation = 0;
                     break;
-                }
-                if(value !== "="){
+                } else {
                 result.textContent = num1 + value;
                 isOperatorLast = true;
                 idxOfOperatorInEquation = result.textContent.length - 1;
@@ -86,15 +85,6 @@ function displayOperator(opBtn) {
 
 
 function displayNumber(nodeBtn) {
-    // if (num2 === null) {
-    //     result.textContent = '';
-    //     num2 = '';
-    //     num1 = '';
-    //     isCommaLast = false;
-    //     isOperatorLast = false;
-    //     isCommaInNumber = false;
-    //     idxOfOperatorInEquation = 0;
-    // }
     let value = nodeBtn.textContent;
     result.textContent += value;
     isOperatorLast = false;

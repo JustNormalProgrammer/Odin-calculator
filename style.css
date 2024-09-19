@@ -10,17 +10,16 @@ body{
     width: 500px;
     height: 200px;
     margin-top: 15px;
-    background-color: pink;
+    background-color: #92DCE5;
     display: flex;
     justify-content: flex-end;
     align-items: center;
     font-size: 100px;
-    overflow: scroll hidden;
 }
 .container {
     width: 600px;
     height: 800px;
-    background-color: red;
+    background-color: lightslategray;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -58,5 +57,19 @@ button{
     box-sizing: border-box;
 }
 button:hover{
-    border: 1px solid red;
+    
+}
+#del {
+    background-color: #D64933;
+    color: white;
+}
+#equals{
+    background-color: #92DCE5;
+}
+.num{
+    background-color: #2B303A;
+    color: #EEE5E9;
+}
+.operator{
+    background-color: #7C7C7C;
 }
