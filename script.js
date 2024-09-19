@@ -81,7 +81,7 @@ function displayOperator(opBtn) {
                 // Save first number
                 num1 = parseFloat(result.textContent);
             }
-            // Save idx of operator, display the operator and prepare haleper values for the next number
+            // Save idx of operator, display the operator and prepare helper values for the next number
             if(value === "=" && idxOfOperatorInEquation === 0) break;
                 idxOfOperatorInEquation = result.textContent.length;
                 result.textContent += value;
