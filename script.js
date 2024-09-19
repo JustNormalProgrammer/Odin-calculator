@@ -44,8 +44,8 @@ function displayOperator(opBtn) {
             result.textContent = result.textContent.slice(0, -1);
             break;
         case ".":
-            // Check is "." is already in a number
-            if ((isCommaLast || isCommaInNumber || isOperatorLast) && num2!==null) break;
+            // Check if "." is already in a number
+            if ((isCommaLast || isCommaInNumber || isOperatorLast) || (num2!==null && num2 !== '')) break;
             result.textContent += ".";
             isCommaLast = true;
             isCommaInNumber = true;
@@ -93,6 +93,7 @@ function displayOperator(opBtn) {
 
 // Display the number, reset helper values to prepare them for the next number
 function displayNumber(nodeBtn) {
+    console.log(nodeBtn.textContent.length)
     let value = nodeBtn.textContent;
     result.textContent += value;
     isOperatorLast = false;
@@ -102,24 +103,29 @@ function displayNumber(nodeBtn) {
 function getResult(operator) {
     switch (operator) {
         case "÷":
-            num1 = num1 / num2;
+            num1 = parseFloat((num1 / num2).toFixed(6));
             num2 = null;
             break;
         case "×":
-            num1 = num1 * num2;
+            num1 = parseFloat((num1 * num2).toFixed(6));
             num2 = null;
             break;
         case "−":
-            num1 = num1 - num2;
+            num1 = parseFloat((num1 - num2).toFixed(6));
             num2 = null;
             break;
         case "+":
-            num1 = num1 + num2;
+            num1 = parseFloat((num1 + num2).toFixed(6));
             num2 = null;
             break;
         case "%":
-            num1 = num1 % num2;
+            num1 = parseFloat((num1 % num2).toFixed(6));
             num2 = null;
             break;
+    }
+    if(String(num1).includes(".")) {
+        isCommaInNumber = true;
+    } else {
+        isCommaInNumber = false;
     }
 }
