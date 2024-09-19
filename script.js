@@ -1,15 +1,9 @@
 const result = document.querySelector('.result');
 const buttons = document.querySelectorAll('button');
 const numbers = "0123456789";
-const numberButtons = [];
-const operatorButtons = [];
-Array.from(buttons).forEach(button => {
-    if (numbers.includes(button.textContent)) {
-        numberButtons.push(button);
-    } else {
-        operatorButtons.push(button);
-    }
-});
+const numberButtons = document.querySelectorAll('.num');
+const operatorButtons = document.querySelectorAll('.operator');
+
 
 numberButtons.forEach(numBtn => {
     numBtn.addEventListener('click', () => displayNumber(numBtn));
@@ -25,17 +19,23 @@ let idxOfOperatorInEquation = 0;
 let num1 = '';
 let num2 = '';
 
+// Resets helper values
+function resetValues() {
+    isCommaLast = false;
+    isOperatorLast = false; 
+    idxOfOperatorInEquation = 0;
+}
 function displayOperator(opBtn) {
     let value = opBtn.textContent;
     switch (value) {
         case "C":
+            // Reset everything
             result.textContent = '';
-            isCommaLast = false;
-            isOperatorLast = false;
             isCommaInNumber = false;
-            idxOfOperatorInEquation = 0;
+            resetValues();
             break;
         case "⌫":
+            // Check if special character is last
             if (isCommaLast) isCommaLast = false;
             if (isOperatorLast) {
                 isOperatorLast = false;
@@ -44,36 +44,44 @@ function displayOperator(opBtn) {
             result.textContent = result.textContent.slice(0, -1);
             break;
         case ".":
+            // Check is "." is already in a number
             if ((isCommaLast || isCommaInNumber || isOperatorLast) && num2!==null) break;
             result.textContent += ".";
             isCommaLast = true;
             isCommaInNumber = true;
             break;
+            // Handle "=;+;-;*;/;%" operators
         default:
-            console.log(idxOfOperatorInEquation)
+            // If an operator is last replace it with a new one
             if (isOperatorLast && value !== "=") {
                 result.textContent = result.textContent.slice(0, -1) + value;
                 break;
             }
+            // Add "0" if operator was clicked right after the "." operator
             if (isCommaLast) result.textContent += "0";
+            // Chceck if expression already has any operator: [=;+;-;*;/;%] 
             if (idxOfOperatorInEquation) {
+                // If it does set num 2, slicing the result string from the idx of operator onwards
                 num2 = parseFloat(result.textContent.slice(idxOfOperatorInEquation + 1));
                 getResult(result.textContent.charAt(idxOfOperatorInEquation));
+                // If "=" display evaluated value 
                 if (value === "=") {
                     result.textContent = num1;
-                    isCommaLast = false;
-                    isOperatorLast = false;
-                    idxOfOperatorInEquation = 0;
+                    // Beacause evaluated value can contain a "." operator, we do no reset it.
+                    resetValues();
                     break;
                 } else {
-                result.textContent = num1 + value;
-                isOperatorLast = true;
-                idxOfOperatorInEquation = result.textContent.length - 1;
-                break;
+                    // Evaluate pair of numbers and add following operator immediately
+                    result.textContent = num1 + value;
+                    isOperatorLast = true;
+                    idxOfOperatorInEquation = result.textContent.length - 1;
+                    break;
                 }
             } else {
+                // Save first number
                 num1 = parseFloat(result.textContent);
             }
+            // Save idx of operator, display the operator and prepare haleper values for the next number
             if(value === "=" && idxOfOperatorInEquation === 0) break;
                 idxOfOperatorInEquation = result.textContent.length;
                 result.textContent += value;
@@ -83,13 +91,14 @@ function displayOperator(opBtn) {
     }
 }
 
-
+// Display the number, reset helper values to prepare them for the next number
 function displayNumber(nodeBtn) {
     let value = nodeBtn.textContent;
     result.textContent += value;
     isOperatorLast = false;
     isCommaLast = false;
 }
+// Save evaluated value in num1 and set num2 to null
 function getResult(operator) {
     switch (operator) {
         case "÷":
