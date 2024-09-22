@@ -11,10 +11,12 @@ body{
     height: 200px;
     margin-top: 15px;
     background-color: #92DCE5;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
+    text-align: end;
+    line-height: 200px;
     font-size: 100px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
 }
 .container {
     width: 600px;
