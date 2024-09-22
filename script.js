@@ -52,8 +52,9 @@ function displayOperator(opBtn) {
             break;
             // Handle "=;+;-;*;/;%" operators
         default:
-            // If an operator is last replace it with a new one
-            if (isOperatorLast && value !== "=") {
+            // If an operator is last replace it with a new one unless value is "="
+            if (isOperatorLast) {
+                if(value === "=") break;
                 result.textContent = result.textContent.slice(0, -1) + value;
                 break;
             }
